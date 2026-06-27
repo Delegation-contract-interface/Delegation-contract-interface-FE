@@ -1,0 +1,10 @@
+# Claude
+CLAUDE.md
+.claude/
+AGENTS.md
+
+# Next.js
+.next/
+node_modules/
+.env*.local
+.env
