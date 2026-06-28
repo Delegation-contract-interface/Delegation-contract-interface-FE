@@ -24,9 +24,14 @@ export function useSessionEvents(sessionId: string | null) {
   const esRef = useRef<EventSource | null>(null);
 
   useEffect(() => {
-    if (!sessionId) return;
+    if (!sessionId) {
+      setStatus("idle");
+      setPendingEvent(null);
+      return;
+    }
 
     setStatus("connecting");
+    setPendingEvent(null);
     const es = new EventSource(
       `${process.env.NEXT_PUBLIC_API_URL}/sessions/${sessionId}/events`
     );
