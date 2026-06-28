@@ -13,8 +13,11 @@ export default function ConfirmationModal({ event, onResolve }: Props) {
 
   const handle = async (approved: boolean) => {
     setLoading(true);
-    await onResolve(approved);
-    setLoading(false);
+    try {
+      await onResolve(approved);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
