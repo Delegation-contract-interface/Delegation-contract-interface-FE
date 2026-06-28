@@ -15,6 +15,7 @@ type RunStatus = "idle" | "running" | "done" | "error";
 
 export default function RunPage() {
   const [contracts, setContracts] = useState<Contract[]>([]);
+  const [contractsError, setContractsError] = useState("");
   const [selectedContractId, setSelectedContractId] = useState("");
   const [message, setMessage] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -26,9 +27,12 @@ export default function RunPage() {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/contracts`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
       .then(setContracts)
-      .catch(() => {});
+      .catch(() => setContractsError("계약 목록을 불러오지 못했다."));
   }, []);
 
   useEffect(() => {
@@ -76,12 +80,14 @@ export default function RunPage() {
 
   const handleConfirm = async (approved: boolean) => {
     if (!sessionId) return;
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sessions/${sessionId}/confirm`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sessions/${sessionId}/confirm`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ approved }),
     });
-    clearPendingEvent();
+    if (res.ok) {
+      clearPendingEvent();
+    }
   };
 
   const handleReset = () => {
@@ -110,7 +116,9 @@ export default function RunPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 위임 계약 <span className="text-red-500">*</span>
               </label>
-              {contracts.length === 0 ? (
+              {contractsError ? (
+                <p className="text-sm text-red-500">{contractsError}</p>
+              ) : contracts.length === 0 ? (
                 <p className="text-sm text-gray-400">
                   등록된 계약이 없다.{" "}
                   <Link href="/contracts/new" className="underline text-black">
