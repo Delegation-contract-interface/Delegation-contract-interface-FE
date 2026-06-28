@@ -11,6 +11,7 @@ interface Contract {
   created_at: string;
 }
 
+/** 위임 계약 목록 페이지. BE에서 계약 목록을 조회해 표시한다. */
 export default function ContractsPage() {
   const [contracts, setContracts] = useState<Contract[]>([]);
   const [loading, setLoading] = useState(true);
