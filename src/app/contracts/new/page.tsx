@@ -13,8 +13,9 @@ export default function NewContractPage() {
     allowedTools: [],
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim()) {
       setError("계약 이름을 입력해주세요.");
@@ -25,8 +26,24 @@ export default function NewContractPage() {
       return;
     }
     setError("");
-    // TODO: API 연동
-    console.log("저장할 계약:", form);
+    setLoading(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contracts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          description: form.description,
+          allowed_tools: form.allowedTools,
+        }),
+      });
+      if (!res.ok) throw new Error("저장에 실패했다.");
+      router.push("/contracts");
+    } catch {
+      setError("계약 저장 중 오류가 발생했다. 다시 시도해주세요.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -94,9 +111,10 @@ export default function NewContractPage() {
 
           <button
             type="submit"
-            className="w-full bg-black text-white py-2.5 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+            disabled={loading}
+            className="w-full bg-black text-white py-2.5 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            계약 저장
+            {loading ? "저장 중..." : "계약 저장"}
           </button>
         </form>
       </main>
