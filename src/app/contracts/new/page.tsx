@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import ToolSelector from "@/components/contract/ToolSelector";
 import { DelegationContract } from "@/types/contract";
 
+/** 위임 계약 생성 폼 페이지. 이름·설명·허용 툴을 입력하고 BE에 저장한다. */
 export default function NewContractPage() {
   const router = useRouter();
   const [form, setForm] = useState<DelegationContract>({
