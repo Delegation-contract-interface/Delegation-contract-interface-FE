@@ -25,6 +25,7 @@ export default function NewContractPage() {
       setError("허용할 작업을 하나 이상 선택해주세요.");
       return;
     }
+    if (loading) return;
     setError("");
     setLoading(true);
     try {
