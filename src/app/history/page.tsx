@@ -61,9 +61,10 @@ export default function HistoryPage() {
 
         <ul className="space-y-3">
           {sessions.map((s) => (
-            <li
-              key={s.session_id}
-              className="border border-gray-200 rounded-lg p-4 space-y-2"
+            <li key={s.session_id}>
+            <Link
+              href={`/history/${s.session_id}`}
+              className="block border border-gray-200 rounded-lg p-4 space-y-2 hover:bg-gray-50 transition-colors"
             >
               <div className="flex items-center justify-between">
                 <span
@@ -81,6 +82,7 @@ export default function HistoryPage() {
               {s.result && (
                 <p className="text-xs text-gray-500 line-clamp-2">{s.result}</p>
               )}
+            </Link>
             </li>
           ))}
         </ul>
