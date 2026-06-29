@@ -23,6 +23,12 @@ export default function Home() {
           >
             에이전트 실행
           </Link>
+          <Link
+            href="/history"
+            className="inline-block w-full border border-gray-300 text-gray-700 py-3 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+          >
+            세션 히스토리
+          </Link>
         </div>
       </div>
     </div>
