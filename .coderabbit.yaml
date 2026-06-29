@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "ko-KR"
+tone_instructions: "시니어 프론트엔드 개발자처럼 리뷰하되 원인과 개선 방향을 중심으로 설명하세요. Next.js App Router, TypeScript, React 훅 규칙, 접근성, SSE 처리, 보안, 성능, 회귀 위험을 우선 보고 한국어로 간결하게 작성하세요."
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  changed_files_summary: true
+  review_status: true
+  assess_linked_issues: false
+  related_prs: false
+  suggested_labels: true
+  suggested_reviewers: false
+  auto_assign_reviewers: false
+  sequence_diagrams: false
+  poem: false
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    ignore_title_keywords:
+      - "[Docs]"
+    base_branches:
+      - "main"
+
+  path_filters:
+    - "!.next/**"
+    - "!node_modules/**"
+    - "!*.lock"
+
+  path_instructions:
+    - path: "src/app/**"
+      instructions: |
+        Next.js App Router 규칙에 맞게 Server/Client 컴포넌트가 적절히 분리되어 있는지 확인해주세요.
+        "use client" 지시어가 필요한 곳에만 사용되는지 검토해주세요.
+        페이지 컴포넌트에서 데이터 페칭 방식(fetch vs useEffect)이 일관성 있게 사용되는지 확인해주세요.
+
+    - path: "src/components/**"
+      instructions: |
+        컴포넌트는 단일 책임 원칙을 따라야 합니다.
+        props 타입이 명시적으로 정의되어 있는지, 불필요한 리렌더링을 유발하는 코드가 없는지 확인해주세요.
+        로딩/에러 상태가 적절히 처리되어 있는지 검토해주세요.
+
+    - path: "src/hooks/**"
+      instructions: |
+        React 훅 규칙(최상위에서만 호출, 조건문 내 사용 금지)을 준수하는지 확인해주세요.
+        SSE(EventSource) 사용 시 컴포넌트 언마운트 시 정리(cleanup)가 되는지 검토해주세요.
+        의존성 배열(useEffect deps)이 올바르게 설정되어 있는지 확인해주세요.
+
+    - path: "src/types/**"
+      instructions: |
+        타입 정의가 BE API 응답 스펙과 일치하는지 확인해주세요.
+        any 타입 사용을 지양하고 명확한 타입이 사용되는지 검토해주세요.
+
+    - path: "*.json"
+      instructions: |
+        환경변수나 민감한 정보가 하드코딩되어 있지 않은지 확인해주세요.
+        Vercel 배포 설정이 운영 환경에 적합한지 검토해주세요.
+
+chat:
+  auto_reply: false
