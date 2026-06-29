@@ -143,7 +143,7 @@ export default function RunPage() {
                 placeholder="AI에게 요청할 내용을 입력하세요."
                 rows={4}
                 disabled={runStatus === "running"}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black resize-none disabled:opacity-50"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-black resize-none disabled:opacity-50"
               />
             </div>
 
