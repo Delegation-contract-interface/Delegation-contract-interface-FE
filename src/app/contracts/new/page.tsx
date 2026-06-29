@@ -77,7 +77,7 @@ export default function NewContractPage() {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="예: 파일 읽기 전용 에이전트"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                 />
               </div>
               <div>
@@ -87,7 +87,7 @@ export default function NewContractPage() {
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   placeholder="이 AI가 어떤 역할을 하는지 설명해주세요."
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
                 />
               </div>
             </div>
