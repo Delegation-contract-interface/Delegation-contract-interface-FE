@@ -29,6 +29,12 @@ export default function Home() {
           >
             세션 히스토리
           </Link>
+          <Link
+            href="/stats"
+            className="inline-block w-full border border-gray-300 text-gray-700 py-3 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+          >
+            통계 대시보드
+          </Link>
         </div>
       </div>
     </div>
