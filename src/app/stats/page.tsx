@@ -20,6 +20,7 @@ const STATUS_COLOR: Record<string, string> = {
   waiting_confirmation: "bg-yellow-500",
 };
 
+/** 세션 기반 AI 자율성 통계를 시각화하는 대시보드 페이지. */
 export default function StatsPage() {
   const [stats, setStats] = useState<StatsData | null>(null);
   const [loading, setLoading] = useState(true);
